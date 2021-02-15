@@ -13,9 +13,9 @@ class ForeignKeyConstraints extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table){
-            $table->foreignId('premium_account_id')->constrained();
-        });
+        // Schema::table('users', function (Blueprint $table){
+        //     $table->foreignId('premium_account_id')->constrained();
+        // });
         Schema::table('posts', function (Blueprint $table){
             $table->foreignId('user_id')->constrained();
         });
@@ -35,9 +35,9 @@ class ForeignKeyConstraints extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table){
-            $table->dropForeign('premium_account_id');
-        });
+        // Schema::table('users', function (Blueprint $table){
+        //     $table->dropForeign('premium_account_id');
+        // });
         Schema::table('posts', function (Blueprint $table){
             $table->dropForeign('user_id');
         });

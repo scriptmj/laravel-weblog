@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             //$table->integer('user_id');
             $table->timestamps();
             $table->string('title');
-            $table->string('excerpt');
-            $table->string('body');
+            $table->longtext('excerpt');
+            $table->longtext('body');
             $table->string('categories')->nullable();
             $table->boolean('premium')->default(false);
         });

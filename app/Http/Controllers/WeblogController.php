@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Grocery;
+use App\Models\Post;
+use App\Models\User;
 
 class WeblogController extends Controller{
     function index(){
-        return view('weblog.index');
+        $posts = Post::orderBy('created_at', 'DESC')->take(5)->get();
+        return view('weblog.index', ['posts' => $posts]);
     }
 
     function create(){

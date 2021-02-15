@@ -9,6 +9,15 @@
 <body>
     <div class="container">
     <h3>Header</h3>
+    <div class="container">
+        <ul class="list-unstyled">
+            <li><a href="{{route('weblog.index')}}">Home</a></li>
+            <li><a href="{{route('weblog.create')}}">Nieuw bericht</a></li>
+            <li><a href="{{route('weblog.login')}}">Login</a></li>
+            <li><a href="{{route('weblog.premium')}}">Premium</a></li>
+            <li><a href="{{route('weblog.written')}}">Geschreven</a></li>
+        </ul>
+    </div>
     </div>
     <div class="container">
         @yield ('content')
