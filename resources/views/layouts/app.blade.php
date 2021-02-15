@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -12,10 +15,10 @@
     <div class="container">
         <ul class="list-unstyled">
             <li><a href="{{route('weblog.index')}}">Home</a></li>
-            <li><a href="{{route('weblog.create')}}">Nieuw bericht</a></li>
-            <li><a href="{{route('weblog.login')}}">Login</a></li>
-            <li><a href="{{route('weblog.premium')}}">Premium</a></li>
-            <li><a href="{{route('weblog.written')}}">Geschreven</a></li>
+            <li><a href="{{route('post.create')}}">Nieuw bericht</a></li>
+            <li><a href="{{route('user.login')}}">Login</a></li>
+            <li><a href="{{route('user.premium')}}">Premium</a></li>
+            <li><a href="{{route('user.written')}}">Geschreven</a></li>
         </ul>
     </div>
     </div>

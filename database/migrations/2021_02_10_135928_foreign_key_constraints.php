@@ -24,7 +24,7 @@ class ForeignKeyConstraints extends Migration
         });
         Schema::table('comments', function (Blueprint $table){
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('posts_id')->constrained();
+            $table->foreignId('post_id')->constrained();
         });
     }
 
@@ -46,7 +46,7 @@ class ForeignKeyConstraints extends Migration
         });
         Schema::table('comments', function (Blueprint $table){
             $table->dropForeign('user_id');
-            $table->dropForeign('posts_id');
+            $table->dropForeign('post_id');
         });
     }
 }

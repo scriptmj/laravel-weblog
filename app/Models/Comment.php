@@ -9,11 +9,19 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['body', 'user_id', 'post_id', 'posted_at'];
+
+    public $timestamps = false;
+
     public function user(){
-        $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function post(){
-        $this->belongsTo('App\Models\Post');
+        return $this->belongsTo('App\Models\Post');
     }
+
+    // public function getById($id){
+    //     return $this->where('post_id', $id)->get();
+    // }
 }

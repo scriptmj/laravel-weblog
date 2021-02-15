@@ -3,7 +3,7 @@
 @section('content')
 <h1>New post</h1>
 
-<form class="form-horizontal" action="{{route('weblog.create')}}" method="post">
+<form class="form-horizontal" action="{{route('post.create')}}" method="post">
     @csrf
 
     <div class="form-group @error('title') has-error @enderror">

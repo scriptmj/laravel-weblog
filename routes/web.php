@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeblogController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PremiumController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'App\Http\Controllers\WeblogController@index')->name('weblog.index');
+Route::get('/', 'App\Http\Controllers\PostController@index')->name('weblog.index');
 
-Route::get('/create', 'App\Http\Controllers\WeblogController@create')->name('weblog.create');
-Route::post('/create', 'App\Http\Controllers\WeblogController@store')->name('weblog.store');
+Route::get('/create', 'App\Http\Controllers\PostController@create')->name('post.create');
+Route::post('/create', 'App\Http\Controllers\PostController@store')->name('post.store');
 
-Route::get('/login', 'App\Http\Controllers\WeblogController@login')->name('weblog.login');
+Route::get('/post/{post}', 'App\Http\Controllers\PostController@get')->name('post.get');
 
-Route::get('/premium', 'App\Http\Controllers\WeblogController@premium')->name('weblog.premium');
+Route::post('/post/{post}', 'App\Http\Controllers\PostController@addComment')->name('post.addcomment');
 
-Route::get('/written', 'App\Http\Controllers\WeblogController@written')->name('weblog.written');
+Route::get('/login', 'App\Http\Controllers\UserController@login')->name('user.login');
+
+Route::get('/premium', 'App\Http\Controllers\UserController@premium')->name('user.premium');
+
+Route::get('/written', 'App\Http\Controllers\UserController@written')->name('user.written');
