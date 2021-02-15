@@ -27,4 +27,19 @@ class WeblogController extends Controller{
     function written(){
         return view('weblog.writtenposts');    
     }
+
+    function store(){
+        //dd($this->validateArticle());
+        Post::create($this->validateArticle());
+        return redirect(route('weblog.index'));
+    }
+
+    function validateArticle(){
+        return request()->validate([
+            'title' => 'required|string|min:2',
+            'excerpt' => 'required|string|min:2',
+            'body' => 'required|string|min:2',
+            'user_id' => 'required|integer',
+        ]);
+    }
 }

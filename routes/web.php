@@ -16,6 +16,7 @@ Route::get('/', function () {
 Route::get('/', 'App\Http\Controllers\WeblogController@index')->name('weblog.index');
 
 Route::get('/create', 'App\Http\Controllers\WeblogController@create')->name('weblog.create');
+Route::post('/create', 'App\Http\Controllers\WeblogController@store')->name('weblog.store');
 
 Route::get('/login', 'App\Http\Controllers\WeblogController@login')->name('weblog.login');
 
