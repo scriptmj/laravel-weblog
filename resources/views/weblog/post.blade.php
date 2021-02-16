@@ -28,15 +28,6 @@
                 <p class="help-block">{{$errors->first('body')}}</p>
             @enderror
         </div>
-        <div class="form-group @error('user_id') has-error @enderror">
-            <label for="user_id" class="form-label">User ID</label>
-            <input type="text" name="user_id" id="user_id" value="2" class="form-control" readonly>
-            <input type="text" name="post_id" id="post_id" value="{{$post->id}}" class="form-control" readonly>
-            
-            @error('user_id')
-                <p class="help-block">{{$errors->first('user_id')}}</p>
-            @enderror
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br />

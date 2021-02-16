@@ -23,13 +23,14 @@ class PostController extends Controller
     }
 
     function addComment(Comment $comment, Post $post){
-        //dd($this->validateComment());
+        request()->merge(['post_id' => $post->id]);
+        request()->merge(['user_id' => 3]);
         Comment::create($this->validateComment());
         return redirect(route('post.get', [$post]));
     }
 
     function store(){
-        //dd($this->validateArticle());
+        request()->merge(['user_id' => 2]);
         Post::create($this->validateArticle());
         return redirect(route('weblog.index'));
     }
