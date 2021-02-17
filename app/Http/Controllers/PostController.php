@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -32,6 +33,27 @@ class PostController extends Controller
     function store(){
         request()->merge(['user_id' => 2]);
         Post::create($this->validateArticle());
+        return redirect(route('weblog.index'));
+    }
+
+    function written(User $user){
+        $posts = Post::orderBy('created_at', 'DESC')->where('user_id', $user->id)->get();
+        return view('weblog.writtenposts', ['posts' => $posts]);    
+    }
+
+    function editPost(Post $post){
+        return view('weblog.edit', ['post' => $post]);
+    }
+
+    function updatePost(Post $post){
+        request()->merge(['user_id' => $post->user_id]);
+        $post->update($this->validateArticle());
+
+        return redirect(route('post.get', [$post]));
+    }
+
+    function deletePost(Post $post){
+        $post->delete();
         return redirect(route('weblog.index'));
     }
 

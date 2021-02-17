@@ -1,10 +1,10 @@
 @extends('../layouts/app')
 
 @section('content')
-<h1>New post</h1>
-
-<form class="form-horizontal" action="{{route('post.create')}}" method="post">
+<h1>Edit</h1>
+<form class="form-horizontal" action="{{route('post.update', $post)}}" method="post">
     @csrf
+    @method('put')
 
     <div class="form-group @error('title') has-error @enderror">
         <label for="title" class="form-label">Title</label>
@@ -13,7 +13,7 @@
             class="form-control"
             id="title" 
             name="title" 
-            value= "{{old('title')}}"
+            value= "{{old('title', $post->title)}}"
             >
             
         @error('title')
@@ -27,7 +27,7 @@
             class="form-control" 
             id="excerpt" 
             name="excerpt" 
-            rows="3">{{old('excerpt')}}</textarea>
+            rows="3">{{old('excerpt', $post->excerpt)}}</textarea>
         
         @error('excerpt')
             <p class="help-block">{{$errors->first('excerpt')}}</p>
@@ -40,26 +40,19 @@
             class="form-control" 
             id="body" 
             name="body" 
-            rows="8">{{old('body')}}</textarea>
+            rows="8">{{old('body', $post->body)}}</textarea>
         
         @error('body')
             <p class="help-block">{{$errors->first('body')}}</p>
         @enderror
     </div>
-
-    <div class="form-group">
-        <label for="categories" class="form-label">Categories</label>
-        <input 
-            class="form-control" 
-            name="categories" 
-            id="categories" 
-            type="text" 
-            value="" 
-            data-role="tagsinput">
+    <div>
+        <p>{{$errors}}</p>
     </div>
     
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+
 @endsection

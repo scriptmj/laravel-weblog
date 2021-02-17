@@ -14,8 +14,4 @@ class UserController extends Controller
     function premium(){
         return view('weblog.premiumsignon');    
     }
-
-    function written(){
-        return view('weblog.writtenposts');    
-    }
 }
