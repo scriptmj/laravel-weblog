@@ -9,6 +9,13 @@
     <div class="card-body">
         <!-- <p>{{$post->excerpt}}</p> -->
         <p>{!!$post->body!!}</p>
+        <div>
+        @if ($post->categories)
+        @foreach($post->categories as $category)
+            {{$category->name}}
+        @endforeach
+        @endif
+        </div>
     </div>
 </div>
 

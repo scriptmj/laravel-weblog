@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -15,11 +16,17 @@ class PostController extends Controller
     }
 
     function create(){
-        return view('weblog.newpost');    
+        $categories = Category::get();
+        return view('weblog.newpost', ["categories" => $categories]);    
     }
 
     function get(Post $post){
+        //$categories = Category::where('post_id', $post->id)->get();
         $comments = Comment::where('post_id', $post->id)->get();
+        $test = $post->categories();
+        dd($test);
+        //return view('weblog.post', ['post' => $post, 'comments' => $comments, 'categories' => $categories]);
+        //dd($post->categories);
         return view('weblog.post', ['post' => $post, 'comments' => $comments]);
     }
 
@@ -32,7 +39,10 @@ class PostController extends Controller
 
     function store(){
         request()->merge(['user_id' => 2]);
-        Post::create($this->validateArticle());
+        $this->validateArticle();
+        $post = new Post(request(['title', 'excerpt', 'body', 'user_id']));
+        $post->save();
+        $post->categories()->attach(request('categories'));
         return redirect(route('weblog.index'));
     }
 
@@ -63,6 +73,7 @@ class PostController extends Controller
             'excerpt' => 'required|string|min:2',
             'body' => 'required|string|min:2',
             'user_id' => 'required|integer',
+            'categories' => 'exists:categories,id',
         ]);
     }
 
