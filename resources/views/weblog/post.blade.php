@@ -10,11 +10,11 @@
         <!-- <p>{{$post->excerpt}}</p> -->
         <p>{!!$post->body!!}</p>
         <div>
-        @if ($post->categories)
+        <!-- @if ($post->categories) -->
         @foreach($post->categories as $category)
             {{$category->name}}
         @endforeach
-        @endif
+        <!-- @endif -->
         </div>
     </div>
 </div>

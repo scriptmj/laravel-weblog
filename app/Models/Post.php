@@ -23,7 +23,8 @@ class Post extends Model
         //return $this->belongsToMany('App\Models\Category', 'category_post', 'category_id', 'post_id');
         //return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
         //return $this->belongsToMany(Category::class);
-        return $this->belongsToMany('App\Models\Category', 'category_post');
+        //return $this->belongsToMany('App\Models\Category', 'category_post');
+        return $this->belongsToMany('App\Models\Category');
     }
 
     public function comments(){

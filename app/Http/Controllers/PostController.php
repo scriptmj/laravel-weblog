@@ -23,8 +23,11 @@ class PostController extends Controller
     function get(Post $post){
         //$categories = Category::where('post_id', $post->id)->get();
         $comments = Comment::where('post_id', $post->id)->get();
-        $test = $post->categories();
-        dd($test);
+        $post->categories = $post->categories()->get();
+        //dd($post);
+        //dd($post->categories()->toSql(), $post->categories()->getBindings());
+        //dd($post->categories()->getQuery());
+        //dd($test);
         //return view('weblog.post', ['post' => $post, 'comments' => $comments, 'categories' => $categories]);
         //dd($post->categories);
         return view('weblog.post', ['post' => $post, 'comments' => $comments]);
