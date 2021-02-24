@@ -1,20 +1,10 @@
 @extends('../layouts/app')
 
 @section('content')
-<h1>Index</h1>
 
-<br />
-<div id="category-choices">
-    <p>Filter by category</p>
-    @foreach($categories as $category)
-        <button id="cat {{$category->id}}" type="button" class="category btn btn-light" onClick="filterPostsByCategory('{{$category->id}}')">{{$category->name}}</button>
-    @endforeach
-    <hr />
-</div>
+<h2>Posts tagged as: {{$category->name}}</h2>
 
-<div id="contentDiv">
-@foreach($posts as $post)
-
+    @foreach($posts as $post)
     <div class="card w-50">
         <h2 class="card-title"><a href="{{route('post.get', $post)}}">{{$post->title}}</a></h2>
         <a href="{{route('post.get', $post)}}"><img class="card-img-top" width="50%" src="https://picsum.photos/800/400?random={{$post->id}}"></img></a>
@@ -23,22 +13,18 @@
             <p class="card-text">{{$post->excerpt}}</p>
             <a class="card-link" href="{{route('post.get', $post)}}">Read more...</a>
             <hr>
-            @if (count($post->categories) > 0)
+            @if ($post->categories)
                 @foreach($post->categories as $category)
-                
                     <a href="/category/{{$category->id}}/posts" class="btn border p-1 m-1">{{$category->name}}</a>
                 @endforeach
-            @else
-                <p class="text-muted">No category for this post</p>
+
             @endif
+            <!--<p class="card-text">{{$post->body}}</p>-->
         </div>
         <div class="card-footer">
             <h6 class="card-subtitle mb-2 text-muted">Last updated: {{$post->lastUpdatedAt()}}</h6> 
         </div>
     </div>
-
-
-@endforeach
-</div>
+    @endforeach
 
 @endsection

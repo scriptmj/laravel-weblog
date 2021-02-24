@@ -20,11 +20,7 @@ class Post extends Model
     }
 
     public function categories(){
-        //return $this->belongsToMany('App\Models\Category', 'category_post', 'category_id', 'post_id');
-        //return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
-        //return $this->belongsToMany(Category::class);
-        //return $this->belongsToMany('App\Models\Category', 'category_post');
-        return $this->belongsToMany('App\Models\Category', 'category_post');
+        return $this->belongsToMany(Category::class);
     }
 
     public function comments(){
@@ -33,8 +29,6 @@ class Post extends Model
 
     public function lastUpdatedAt(){
         $updated_at = Carbon::parse($this->updated_at);
-        //return diffForHumans(Carbon::now(), $updated_at);
-        //return Carbon::now()->diffForHumans(Carbon::parse($this->updated_at));
         return Carbon::parse($this->updated_at)->diffForHumans(Carbon::now(), CarbonInterface::DIFF_RELATIVE_TO_NOW);
     }
 

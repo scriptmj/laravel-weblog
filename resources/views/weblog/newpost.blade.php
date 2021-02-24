@@ -47,35 +47,29 @@
         @enderror
     </div>
 
-    <!-- <div class="form-group">
-        <label for="categories" class="form-label">Categories</label>
-        <input 
-            class="form-control" 
-            name="categories" 
-            id="categories" 
-            type="text" 
-            value="" 
-            data-role="tagsinput">
-    </div> -->
-    <div class="form-group @error('categories') has-error @enderror">
-        <label for="categories" class="form-label">Categories</label>
-        <!-- <div>@foreach($categories as $category)
-                <button type="button" onclick="addTag('{{$category->id}}')">{{$category->name}}</button>
-            @endforeach</div> -->
-        <select name="categories[]" id="categories" multiple="multiple"> 
-        <!-- class="chosen-select" multiple="multiple" name="categories[]" id="categories"> -->
-            @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select>
+    <div class="form-group @error('categories') has-error @enderror" id="categoriesDiv"></div>
+    <select style="display:none" name="categories[]" id="categoriesInput" multiple></select>
+
+    <div id="category-choices">
+        @foreach($categories as $category)
+            <button id="cat {{$category->id}}" type="button" class="btn btn-outline-primary" onClick="addCategory('{{$category->id}}', '{{$category->name}}')">{{$category->name}}</button>
+        @endforeach
         @error('categories')
             <p class="help-block">{{$errors->first('categories')}}</p>
         @enderror
+    </div>
+
+    <div>
+        <div class="form-group">
+            <label for="add-category" class="form-label">New category: </label>
+            <input type="text" id="add-category-input" name="add-category">
+            <button type="button" class="btn btn-success glyphicon glyphicon-plus" onclick="addNewCategory()"></button>
+        </div>
     </div>
     
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 
-<script src="js/app.js"></script>
 </form>
+
 @endsection

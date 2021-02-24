@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($posts as $post)
+        @foreach($user->posts->sortByDesc('created_at') as $post)
         <tr>
             <td><strong>{{$post->title}}</strong></td>
             <td>{{$post->created_at}}</td>

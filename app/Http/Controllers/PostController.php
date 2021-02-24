@@ -12,26 +12,20 @@ class PostController extends Controller
 {
     function index(){
         $posts = Post::orderBy('created_at', 'DESC')->take(5)->get();
-        return view('weblog.index', ['posts' => $posts]);
+        $categories = Category::get();
+        return view('weblog.index', [
+            'posts' => $posts,
+            'categories' => $categories,
+            ]);
     }
 
     function create(){
         $categories = Category::get();
-        return view('weblog.newpost', ["categories" => $categories]);
+        return view('weblog.newpost', ["categories" => $categories]);    
     }
 
     function get(Post $post){
-        //$categories = Category::where('post_id', $post->id)->get();
-        // $comments = Comment::where('post_id', $post->id)->get();
-        $comments = $post->comments;
-        $post->categories = $post->categories()->get();
-        dd($post->categories);
-        //dd($post->categories()->toSql(), $post->categories()->getBindings());
-        //dd($post->categories()->getQuery());
-        //dd($test);
-        //return view('weblog.post', ['post' => $post, 'comments' => $comments, 'categories' => $categories]);
-        //dd($post->categories);
-        return view('weblog.post', ['post' => $post, 'comments' => $comments]);
+        return view('weblog.post', ['post' => $post]);
     }
 
     function addComment(Comment $comment, Post $post){
@@ -51,8 +45,7 @@ class PostController extends Controller
     }
 
     function written(User $user){
-        $posts = Post::orderBy('created_at', 'DESC')->where('user_id', $user->id)->get();
-        return view('weblog.writtenposts', ['posts' => $posts]);
+        return view('weblog.writtenposts', ['user' => $user]);    
     }
 
     function editPost(Post $post){

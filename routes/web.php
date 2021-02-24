@@ -35,6 +35,7 @@ Route::delete('/post/{post}', 'App\Http\Controllers\PostController@deletePost')-
 Route::get('/category', 'App\Http\Controllers\CategoryController@get')->name('category.get');
 Route::post('/category', 'App\Http\Controllers\CategoryController@create')->name('category.create');
 Route::delete('/category/{category}', 'App\Http\Controllers\CategoryController@destroy')->name('category.destroy');
+Route::get('/category/{category}/posts', 'App\Http\Controllers\CategoryController@getPostsByCategory')->name('category.posts');
 
 Route::get('/login', 'App\Http\Controllers\UserController@login')->name('user.login');
 

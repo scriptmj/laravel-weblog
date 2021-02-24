@@ -7,14 +7,16 @@
     <img class="card-img-top" src="https://picsum.photos/1200/600"></img>
     <h5 class="mb-2"><strong>By: {{$post->user->username}}.</strong></h5> 
     <div class="card-body">
-        <!-- <p>{{$post->excerpt}}</p> -->
         <p>{!!$post->body!!}</p>
-        <div>
-        <!-- @if ($post->categories) -->
-        @foreach($post->categories as $category)
-            {{$category->name}}
-        @endforeach
-        <!-- @endif -->
+        <hr>
+        <div class="d-flex flex-row">
+            @if (count($post->categories) > 0)
+                @foreach($post->categories as $category)
+                    <a href="/category/{{$category->id}}/posts" class="btn border p-1 m-1">{{$category->name}}</a>
+                @endforeach
+            @else
+                <p class="text-muted">No category for this post</p>
+            @endif
         </div>
     </div>
 </div>
@@ -40,7 +42,7 @@
     <br />
     <br />
 
-    @foreach($comments as $comment)
+    @foreach($post->comments as $comment)
     <div class="card">
         <p><strong>{{$comment->user->username}}</strong> said:</p>
         <p>{{$comment->body}}</p>

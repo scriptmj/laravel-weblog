@@ -20,7 +20,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longtext('excerpt');
             $table->longtext('body');
-            $table->string('categories')->nullable();
             $table->boolean('premium')->default(false);
         });
     }

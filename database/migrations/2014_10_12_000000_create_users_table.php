@@ -18,13 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email')->unique();
-            // $table->timestamp('created_at');
-            // $table->timestamp('last_login')->nullable();
+            $table->timestamps();
             $table->timestamp('last_user_update')->nullable()->useCurrentOnUpdate();
             $table->boolean('writer')->default(false);
             $table->integer('premium_id')->nullable();
             $table->boolean('admin')->default(false);
-            $table->timestamps(); // deze lijn toevevoegd voor auto timestamps created_at en updated_at
         });
     }
 
