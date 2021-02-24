@@ -17,14 +17,15 @@ class PostController extends Controller
 
     function create(){
         $categories = Category::get();
-        return view('weblog.newpost', ["categories" => $categories]);    
+        return view('weblog.newpost', ["categories" => $categories]);
     }
 
     function get(Post $post){
         //$categories = Category::where('post_id', $post->id)->get();
-        $comments = Comment::where('post_id', $post->id)->get();
+        // $comments = Comment::where('post_id', $post->id)->get();
+        $comments = $post->comments;
         $post->categories = $post->categories()->get();
-        //dd($post);
+        dd($post->categories);
         //dd($post->categories()->toSql(), $post->categories()->getBindings());
         //dd($post->categories()->getQuery());
         //dd($test);
@@ -51,7 +52,7 @@ class PostController extends Controller
 
     function written(User $user){
         $posts = Post::orderBy('created_at', 'DESC')->where('user_id', $user->id)->get();
-        return view('weblog.writtenposts', ['posts' => $posts]);    
+        return view('weblog.writtenposts', ['posts' => $posts]);
     }
 
     function editPost(Post $post){

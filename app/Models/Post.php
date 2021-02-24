@@ -24,7 +24,7 @@ class Post extends Model
         //return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
         //return $this->belongsToMany(Category::class);
         //return $this->belongsToMany('App\Models\Category', 'category_post');
-        return $this->belongsToMany('App\Models\Category');
+        return $this->belongsToMany('App\Models\Category', 'category_post');
     }
 
     public function comments(){
