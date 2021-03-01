@@ -1,8 +1,6 @@
 @extends('../layouts/app')
 
-@section('content')
-<h1>Index</h1>
-
+@section('contentheader')
 <br />
 <div id="category-choices">
     <p>Filter by category</p>
@@ -11,13 +9,14 @@
     @endforeach
     <hr />
 </div>
-
+@endsection
+@section('content')
 <div id="contentDiv">
-@foreach($posts as $post)
+@forelse($posts as $post)
 
     <div class="card w-50">
         <h2 class="card-title"><a href="{{route('post.get', $post)}}">{{$post->title}}</a></h2>
-        <a href="{{route('post.get', $post)}}"><img class="card-img-top" width="50%" src="https://picsum.photos/800/400?random={{$post->id}}"></img></a>
+        <a href="{{route('post.get', $post)}}"><img class="card-img-top" width="50%" src="{{$post->image}}"></img></a>
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">By: {{$post->user->username}}. Published: {{$post->created_at}}</h6>
             <p class="card-text">{{$post->excerpt}}</p>
@@ -26,7 +25,7 @@
             @if (count($post->categories) > 0)
                 @foreach($post->categories as $category)
                 
-                    <a href="/category/{{$category->id}}/posts" class="btn border p-1 m-1">{{$category->name}}</a>
+                    <button onclick="filterPostsByCategory('{{$category->id}}')" class="btn border p-1 m-1">{{$category->name}}</button>
                 @endforeach
             @else
                 <p class="text-muted">No category for this post</p>
@@ -37,8 +36,10 @@
         </div>
     </div>
 
-
-@endforeach
+@empty
+<p>No posts found</p>
+@endforelse
 </div>
+
 
 @endsection

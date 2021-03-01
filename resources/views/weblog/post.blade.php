@@ -4,7 +4,7 @@
 <div class="card w-75">
     <h2 class="card-title">{{$post->title}}</h2>
     <h6 class="card-subtitle mb-2 text-muted">Published: {{$post->created_at}}. Last updated: {{$post->lastUpdatedAt()}}</h6>
-    <img class="card-img-top" src="https://picsum.photos/1200/600"></img>
+    <img class="card-img-top" src="{{$post->image}}"></img>
     <h5 class="mb-2"><strong>By: {{$post->user->username}}.</strong></h5> 
     <div class="card-body">
         <p>{!!$post->body!!}</p>

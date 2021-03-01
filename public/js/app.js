@@ -6,7 +6,7 @@ var categoryChoiceList = document.getElementById('category-choices');
 var newCategoryInput = document.getElementById('add-category-input');
 
 function addCategory(categoryId, categoryName){
-    var node = createNode('span', 'btn btn-success', 'id ' + categoryId, '(resetChosenCategory(' + categoryId + ', \'' + categoryName + '\'))', categoryName);
+    var node = createNode('span', 'btn btn-success', 'id ' + categoryId, 'resetChosenCategory(' + categoryId + ', \'' + categoryName + '\')', categoryName);
     categoryInputDiv.appendChild(node);
     var choice = createChoiceOptionForSelect(categoryId);
     categoryInput.appendChild(choice);
@@ -51,9 +51,9 @@ function addNewCategory(){
         if(this.readyState == 4 && this.status == 201){
             addCategoryToChoiceList(JSON.parse(xhttp.responseText));
             newCategoryInput.value = '';
-        } else {
-            console.log(this.readyState + ', ' + this.status);
-        }
+        } // else {
+        //     console.log(this.readyState + ', ' + this.status);
+        // }
     }
     xhttp.open('POST', '/category', true);
     xhttp.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
@@ -73,7 +73,6 @@ function filterPostsByCategory(categoryId){
     if(clickedButton.getAttribute('class').includes('primary')){
         clickedButton.setAttribute('class', 'category btn btn-light');
         url = '/';
-        //TODO this shows entire page again
     } else {
         clearOtherButtons(clickedButton);
         url = '/category/' + categoryId + '/posts';
@@ -92,7 +91,6 @@ function filterPostsByCategory(categoryId){
 
 function clearOtherButtons(button){
     activeButtons = document.getElementsByClassName('category btn btn-primary');
-    console.log(activeButtons);
     if(activeButtons[0]){
         for(item of activeButtons) {
             item.setAttribute('class', 'category btn btn-light');

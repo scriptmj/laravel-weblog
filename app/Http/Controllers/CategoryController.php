@@ -22,17 +22,11 @@ class CategoryController extends Controller
     }
 
     public function getPostsByCategory(Category $category){
-    
         $view = View::make('weblog.postsbycategory', ['category' => $category, 'posts' => $category->posts]);
         if(request()->ajax()){
             $sections = $view->renderSections();
             return $sections['content'];
         }
-
-        // return view('weblog.postsbycategory', [
-        //     'posts' => $category->posts,
-        //     'category' => $category,
-        // ]);
     }
 
     function validateCategory(){

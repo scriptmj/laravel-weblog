@@ -3,7 +3,7 @@
 @section('content')
 <h1>New post</h1>
 
-<form class="form-horizontal" action="{{route('post.create')}}" method="post" id="newPost">
+<form class="form-horizontal" action="{{route('post.create')}}" method="post" id="newPost" enctype="multipart/form-data">
     @csrf
 
     <div class="form-group @error('title') has-error @enderror">
@@ -44,6 +44,14 @@
         
         @error('body')
             <p class="help-block">{{$errors->first('body')}}</p>
+        @enderror
+    </div>
+
+    <div class="form-group custom-file @error('image-file') has-error @enderror">
+        <input type="file" class="custom-file-input form-control" id="image-file" name="image-file">
+        <label class="custom-file-label form-label" for="image-file">Choose image</label>
+        @error('image-file')
+            <p class="help-block">{{$errors->first('image-file')}}</p>
         @enderror
     </div>
 

@@ -7,16 +7,21 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\View;
+
 
 class PostController extends Controller
 {
     function index(){
         $posts = Post::orderBy('created_at', 'DESC')->take(5)->get();
         $categories = Category::get();
-        return view('weblog.index', [
-            'posts' => $posts,
-            'categories' => $categories,
-            ]);
+        $view = View::make('weblog.index', ['categories' => $categories, 'posts' => $posts]);
+        if(request()->ajax()){
+            $sections = $view->renderSections();
+            return $sections['content'];
+        } else {
+            return $view;
+        }
     }
 
     function create(){
@@ -38,7 +43,9 @@ class PostController extends Controller
     function store(){
         request()->merge(['user_id' => 2]);
         $this->validateArticle();
-        $post = new Post(request(['title', 'excerpt', 'body', 'user_id']));
+        $post = new Post(request(['title', 'excerpt', 'body', 'user_id', 'image-file']));
+        $this->validateFile();
+        $post['image'] = request('image-file')->store('imagefiles');
         $post->save();
         $post->categories()->attach(request('categories'));
         return redirect(route('weblog.index'));
@@ -49,13 +56,18 @@ class PostController extends Controller
     }
 
     function editPost(Post $post){
-        return view('weblog.edit', ['post' => $post]);
+        $categories = Category::get();
+        return view('weblog.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     function updatePost(Post $post){
         request()->merge(['user_id' => $post->user_id]);
         $post->update($this->validateArticle());
-
+        $post->categories()->sync(request('categories'));
+        if(request('image-file') !== null){
+            $this->validateFile(); //TODO DOESN'T VALIDATE
+        }
+        //TODO Old categories are still added through JS and can be added double
         return redirect(route('post.get', [$post]));
     }
 
@@ -72,6 +84,13 @@ class PostController extends Controller
             'user_id' => 'required|integer',
             'categories' => 'exists:categories,id',
         ]);
+    }
+
+    function validateFile(){
+        return request()->validate([
+            'image-file' => 'required|file',
+        ]);
+
     }
 
     function validateComment(){

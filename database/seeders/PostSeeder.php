@@ -22,6 +22,7 @@ class PostSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::create(2020, 4, 6),
             'updated_at' => Carbon::create(2020, 4, 6),
+            'image' => 'imagefiles/092Ut2V4pFG2ZTqUzDKHrk23CpzCbDeudEwlradp.jpg',
         ]);
         DB::table('posts')->insert([
             'title' => 'The Silent Abyss',
@@ -30,6 +31,7 @@ class PostSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::create(2020, 9, 23),
             'updated_at' => Carbon::create(2020, 9, 23),
+            'image' => 'imagefiles/DQjTDJD6VAeEIdGXQweYECsMjR9u7CJ9NiA36KxH.jpg',
         ]);
         DB::table('posts')->insert([
             'title' => 'Touch of Son',
@@ -38,6 +40,7 @@ class PostSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::create(2020, 3, 13),
             'updated_at' => Carbon::create(2020, 3, 13),
+            'image' => 'imagefiles/F3lrKLaMLALC2OkSiCQws6qr2v5aT2IWu90NxvAl.jpg',
         ]);
         DB::table('posts')->insert([
             'title' => 'The Dream\'s Ice',
@@ -50,6 +53,7 @@ class PostSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::create(2020, 5, 23),
             'updated_at' => Carbon::create(2020, 5, 23),
+            'image' => 'imagefiles/FdWcb32SHcUL7pm75IKb9BrzSYR6I8etslhV83N8.jpg',
         ]);
         
         DB::table('posts')->insert([
@@ -63,6 +67,7 @@ class PostSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::create(2020, 9, 23),
             'updated_at' => Carbon::create(2020, 9, 23),
+            'image' => 'imagefiles/UFVo7RnkM3d04qaojr3Oj3v8mPJlkn8fl0QBY4Cn.jpg',
         ]);
         DB::table('posts')->insert([
             'title' => 'Ship in the Witches',
@@ -75,6 +80,7 @@ class PostSeeder extends Seeder
             'user_id' => 4,
             'created_at' => Carbon::create(2020, 9, 11),
             'updated_at' => Carbon::create(2020, 9, 11),
+            'image' => 'imagefiles/UIUfglGN39rkTp2f6Ryauooa4UqnwW7OwSuuNzXh.jpg',
         ]);
         DB::table('posts')->insert([
             'title' => 'The Snow\'s Rainbow',
@@ -87,6 +93,7 @@ class PostSeeder extends Seeder
             'user_id' => 3,
             'created_at' => Carbon::create(2020, 9, 12),
             'updated_at' => Carbon::create(2020, 9, 12),
+            'image' => 'imagefiles/WL7rNZMVUs4kBvJEZqSktRMDeeKGdGlsUEJWz5jJ.jpg',
         ]);
     }
 }

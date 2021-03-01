@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'excerpt', 'body', 'user_id'];
+    protected $fillable = ['title', 'excerpt', 'body', 'user_id', 'imagepath'];
     protected $with = ['categories'];
 
     public function user(){
@@ -38,5 +38,9 @@ class Post extends Model
 
     public function premium(){
         return $this->premium ? 'Yes' : 'No';
+    }
+
+    public function getImageAttribute($value){
+        return asset('storage/'.$value);
     }
 }
