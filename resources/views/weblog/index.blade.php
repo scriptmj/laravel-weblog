@@ -35,10 +35,10 @@
             <h6 class="card-subtitle mb-2 text-muted">Last updated: {{$post->lastUpdatedAt()}}</h6> 
         </div>
     </div>
-
 @empty
 <p>No posts found</p>
 @endforelse
+{{$posts->links()}}
 </div>
 
 

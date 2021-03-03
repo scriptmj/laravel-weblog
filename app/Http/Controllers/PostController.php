@@ -9,14 +9,21 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
 {
     function index(){
-        $posts = Post::orderBy('created_at', 'DESC')->take(5)->get();
+        $user = Auth::user();
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(5);
         $categories = Category::get();
-        $view = View::make('weblog.index', ['categories' => $categories, 'posts' => $posts]);
+        $view = View::make('weblog.index', [
+            'categories' => $categories, 
+            'posts' => $posts, 
+            'user' => $user,
+            ]);
+
         if(request()->ajax()){
             $sections = $view->renderSections();
             return $sections['content'];
@@ -36,13 +43,13 @@ class PostController extends Controller
 
     function addComment(Comment $comment, Post $post){
         request()->merge(['post_id' => $post->id]);
-        request()->merge(['user_id' => 3]);
+        request()->merge(['user_id' => Auth::user()->id]);
         Comment::create($this->validateComment());
         return redirect(route('post.get', [$post]));
     }
 
     function store(){
-        request()->merge(['user_id' => 2]);
+        request()->merge(['user_id' => Auth::user()->id]);
         $this->validateArticle();
         $post = new Post(request(['title', 'excerpt', 'body', 'user_id', 'image-file']));
         $this->validateFile();
@@ -52,7 +59,8 @@ class PostController extends Controller
         return redirect(route('weblog.index'));
     }
 
-    function written(User $user){
+    function written(){
+        $user = Auth::user();
         return view('weblog.writtenposts', ['user' => $user]);    
     }
 

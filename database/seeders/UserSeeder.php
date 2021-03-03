@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -17,27 +18,27 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'username' => 'Liara T\'soni',
-            'password' => Str::random(8),
+            'password' => Hash::make('liaratsoni'),
             'email' => Str::random(10),
         ]);
         DB::table('users')->insert([
             'username' => 'Shepard',
-            'password' => Str::random(8),
+            'password' => Hash::make('cmdrshepard'),
             'email' => Str::random(10),
         ]);
         DB::table('users')->insert([
             'username' => 'Piper Wright',
-            'password' => Str::random(8),
+            'password' => Hash::make('piperwright'),
             'email' => Str::random(10),
         ]);
         DB::table('users')->insert([
             'username' => 'Wrex',
-            'password' => Str::random(8),
+            'password' => Hash::make('urdnotwrex'),
             'email' => Str::random(10),
         ]);
         DB::table('users')->insert([
             'username' => 'Miranda',
-            'password' => Str::random(8),
+            'password' => Hash::make('miranda1'),
             'email' => Str::random(10),
         ]);
     }

@@ -37,17 +37,8 @@ Route::post('/category', 'App\Http\Controllers\CategoryController@create')->name
 Route::delete('/category/{category}', 'App\Http\Controllers\CategoryController@destroy')->name('category.destroy');
 Route::get('/category/{category}/posts', 'App\Http\Controllers\CategoryController@getPostsByCategory')->name('category.posts');
 
-Route::get('/login', 'App\Http\Controllers\UserController@login')->name('user.login');
-Route::get('/register', 'App\Http\Controllers\UserController@register')->name('user.register');
-//Route::
-
 Route::get('/premium', 'App\Http\Controllers\UserController@premium')->name('user.premium');
 
-Route::get('/written/{user}', 'App\Http\Controllers\PostController@written')->name('user.written');
+Route::get('/written', 'App\Http\Controllers\PostController@written')->name('user.written');
 
-
-// Route::post('/tokens/create', function(Request $request){
-//     $token = $request->user()->createToken($request->toke_name);
-
-//     return ['token' => $token];
-// });
+require __DIR__.'/auth.php';

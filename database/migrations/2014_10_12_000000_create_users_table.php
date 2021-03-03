@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamps();
             $table->timestamp('last_user_update')->nullable()->useCurrentOnUpdate();
-            $table->boolean('writer')->default(false);
             $table->integer('premium_id')->nullable();
             $table->boolean('admin')->default(false);
         });

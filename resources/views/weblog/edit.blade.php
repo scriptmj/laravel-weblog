@@ -98,4 +98,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+
+<script src="../../js/image-upload.js"></script>
 @endsection

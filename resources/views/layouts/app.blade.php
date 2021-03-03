@@ -19,24 +19,45 @@
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link {{Request::path() === '/' ? 'active' : ''}}" href="{{route('weblog.index')}}">Home</a>
             </li>
+            @if(Auth::user())
             <li class="nav-item">
-                <a class="nav-link {{Request::path() === 'create' ? 'active' : ''}}" href="{{route('post.create')}}">New post</a>
+                <a class="nav-link {{Request::path() === 'create' ? 'active' : ''}}" href="{{route('post.create')}}">Write post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::path() === 'login' ? 'active' : ''}}" href="{{route('user.login')}}">Login</a>
+                <a class="nav-link {{Request::path() === 'written/2' ? 'active' : ''}}" href="{{route('user.written', 2)}}">Your posts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::path() === 'premium' ? 'active' : ''}}" href="{{route('user.premium')}}">Premium</a>
+                <a class="nav-link {{Request::path() === 'premium' ? 'active' : ''}}" href="{{route('user.premium')}}">Premium account</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{Request::path() === 'written/2' ? 'active' : ''}}" href="{{route('user.written', 2)}}">Written</a>
-            </li>
-        </ul>
+            @endif
+            </ul>
+            <ul class="navbar-nav">
+            @if(!Auth::user())
+                <li class="nav-item">
+                    <a class="nav-link {{Request::path() === 'login' ? 'active' : ''}}" href="{{route('login')}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a type="submit" class="nav-link {{Request::path() === 'register' ? 'active' : ''}}" href="{{route('register')}}">Register</a>
+                </li>
+            
+            @else
+                <li class="nav-item">
+                    <a class="nav-link">Welcome {{Auth::user()->username}}</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{{route('logout')}}" method="post" id="logout">
+                    @csrf
+                        <button type="submit" class="nav-link btn btn-outline-light my-sm-0">Logout</button>
+                    </form>
+                </li>
+            @endif
+            </ul>
     </nav>
+    
     <div class="container">
         @yield ('contentheader')
         @yield ('content')
@@ -45,5 +66,7 @@
         <p class="lead">Made by MJ</p>
     </div>
     <script src="../../js/app.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/category.js"></script>
 </body>
 </html>

@@ -91,4 +91,5 @@
 
 </form>
 
+<script src="../../js/image-upload.js"></script>
 @endsection
