@@ -6,6 +6,7 @@
 <form class="form-horizontal" action="{{route('post.create')}}" method="post" id="newPost" enctype="multipart/form-data">
     @csrf
 
+<!-- Title -->
     <div class="form-group @error('title') has-error @enderror">
         <label for="title" class="form-label">Title</label>
         <input 
@@ -21,6 +22,7 @@
         @enderror
     </div>
     
+<!-- Excerpt -->
     <div class="form-group @error('excerpt') has-error @enderror">
         <label for="excerpt" class="form-label">Excerpt</label>
         <textarea 
@@ -34,6 +36,7 @@
         @enderror
     </div>
     
+<!-- Body -->
     <div class="form-group @error('body') has-error @enderror">
         <label for="body" class="form-label">Body</label>
         <textarea 
@@ -47,6 +50,7 @@
         @enderror
     </div>
 
+<!-- Upload image -->
     <div class="form-group custom-file @error('image-file') has-error @enderror">
         <input type="file" class="custom-file-input form-control" id="image-file" name="image-file">
         <label class="custom-file-label form-label" for="image-file">Choose image</label>
@@ -54,10 +58,16 @@
             <p class="help-block">{{$errors->first('image-file')}}</p>
         @enderror
     </div>
+    <!-- Image preview -->
+    <img id="preview-image-before-upload" style="width:200px;height:100px;margin:5px;"></img>
 
+<!-- Categories selection -->
     <div class="form-group @error('categories') has-error @enderror" id="categoriesDiv"></div>
+
+<!-- Categories selection for form HIDDEN -->    
     <select style="display:none" name="categories[]" id="categoriesInput" multiple></select>
 
+<!-- Category choices -->
     <div id="category-choices">
         @foreach($categories as $category)
             <button id="cat {{$category->id}}" type="button" class="btn btn-outline-primary" onClick="addCategory('{{$category->id}}', '{{$category->name}}')">{{$category->name}}</button>
@@ -67,6 +77,7 @@
         @enderror
     </div>
 
+<!-- Adding new custom category -->
     <div>
         <div class="form-group">
             <label for="add-category" class="form-label">New category: </label>

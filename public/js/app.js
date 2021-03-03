@@ -98,3 +98,23 @@ function clearOtherButtons(button){
     }
     button.setAttribute('class', 'category btn btn-primary');
 }
+
+function removeDuplicateCategories(){
+    //console.log(document.getElementsByClassName("btn btn-outline-primary category-chosen"));
+    let chosenCategories = document.getElementsByClassName("category-chosen");
+    for(category of chosenCategories){
+        removeCategoryFromChoiceList(category.id.slice(3));
+    }
+}
+
+removeDuplicateCategories();
+
+$(document).ready(function (e){
+    $('#image-file').change(function(){
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#preview-image-before-upload').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+});

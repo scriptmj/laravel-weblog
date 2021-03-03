@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 
 
 class PostController extends Controller
@@ -62,16 +63,17 @@ class PostController extends Controller
 
     function updatePost(Post $post){
         request()->merge(['user_id' => $post->user_id]);
+        if(request('image-file') !== null){
+            $this->validateFile();
+            $post['image'] = request('image-file')->store('imagefiles');
+        }
         $post->update($this->validateArticle());
         $post->categories()->sync(request('categories'));
-        if(request('image-file') !== null){
-            $this->validateFile(); //TODO DOESN'T VALIDATE
-        }
-        //TODO Old categories are still added through JS and can be added double
         return redirect(route('post.get', [$post]));
     }
 
     function deletePost(Post $post){
+        $post->categories()->detach();
         $post->delete();
         return redirect(route('weblog.index'));
     }
@@ -88,7 +90,12 @@ class PostController extends Controller
 
     function validateFile(){
         return request()->validate([
-            'image-file' => 'required|file',
+            'image-file' => [
+                'required',
+                'file',
+                'image',
+                Rule::dimensions()->minWidth(200)->minHeight(100),
+                ]
         ]);
 
     }

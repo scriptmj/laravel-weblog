@@ -38,6 +38,8 @@ Route::delete('/category/{category}', 'App\Http\Controllers\CategoryController@d
 Route::get('/category/{category}/posts', 'App\Http\Controllers\CategoryController@getPostsByCategory')->name('category.posts');
 
 Route::get('/login', 'App\Http\Controllers\UserController@login')->name('user.login');
+Route::get('/register', 'App\Http\Controllers\UserController@register')->name('user.register');
+//Route::
 
 Route::get('/premium', 'App\Http\Controllers\UserController@premium')->name('user.premium');
 
