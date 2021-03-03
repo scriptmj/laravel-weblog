@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MailController;
 
 
 /*
@@ -40,5 +41,7 @@ Route::get('/category/{category}/posts', 'App\Http\Controllers\CategoryControlle
 Route::get('/premium', 'App\Http\Controllers\UserController@premium')->name('user.premium');
 
 Route::get('/written', 'App\Http\Controllers\PostController@written')->name('user.written');
+
+Route::get('/sendmail', 'App\Http\Controllers\MailController@sendDigest')->name('mail.senddigest');
 
 require __DIR__.'/auth.php';
