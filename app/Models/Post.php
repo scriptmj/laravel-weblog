@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'excerpt', 'body', 'user_id', 'imagepath'];
+    protected $fillable = ['title', 'excerpt', 'body', 'user_id', 'imagepath', 'premium'];
     protected $with = ['categories'];
 
     public function user(){
@@ -24,7 +24,7 @@ class Post extends Model
     }
 
     public function comments(){
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->orderBy('posted_at');
     }
 
     public function lastUpdatedAt(){
@@ -36,7 +36,7 @@ class Post extends Model
         return Comment::where('post_id', $this->id)->count();
     }
 
-    public function premium(){
+    public function premiumReadable(){
         return $this->premium ? 'Yes' : 'No';
     }
 

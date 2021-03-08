@@ -7,16 +7,20 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Post;
 use App\Mail\Digest;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MailController extends Controller
 {
     public function sendDigest(){
 
-        $posts = Post::get();
-        $mailList = DB::table('mailing_list')->select('email')->get();
+        $lastWeek = Carbon::now()->subDays(7);
+        $posts = Post::where('created_at', '>', $lastWeek)->orderBy('created_at', 'DESC')->get();
+        $mailList = DB::table('users')->select('email')->where('digest', true)->get();
 
-        foreach($mailList as $recipient){
-            Mail::to($recipient)->send(new Digest($posts));
+        if($posts->first() !== null){
+            foreach($mailList as $recipient){
+                Mail::to($recipient)->send(new Digest($posts));
+            }
         }
     }
 }

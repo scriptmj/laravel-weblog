@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_user_update')->nullable()->useCurrentOnUpdate();
             $table->integer('premium_id')->nullable();
             $table->boolean('admin')->default(false);
+            $table->boolean('digest')->default(false);
         });
     }
 

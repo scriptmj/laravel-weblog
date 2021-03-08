@@ -22,7 +22,7 @@
             <td>{{$post->created_at}}</td>
             <td>{{$post->updated_at}}</td>
             <td>{{$post->countComments()}}</td>
-            <td>{{$post->premium()}}</td>
+            <td>{{$post->premiumReadable()}}</td>
             <td>
                 <a href="{{route('post.edit', $post)}}" class="btn btn-primary glyphicon glyphicon-pencil"></a>
             </td>

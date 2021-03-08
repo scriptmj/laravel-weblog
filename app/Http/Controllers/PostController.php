@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     function index(){
-        $user = Auth::user();
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(5);
+        if(Auth::user()->premium()){
+            $posts = Post::orderBy('created_at', 'DESC')->paginate(5);
+        } else {
+            $posts = Post::where('premium', false)->orderBy('created_at', 'DESC')->paginate(5);
+        }
         $categories = Category::get();
         $view = View::make('weblog.index', [
             'categories' => $categories, 
             'posts' => $posts, 
-            'user' => $user,
             ]);
 
         if(request()->ajax()){
@@ -38,7 +40,15 @@ class PostController extends Controller
     }
 
     function get(Post $post){
-        return view('weblog.post', ['post' => $post]);
+        if($post->premium){
+            if(Auth::user()->premium()){
+                return view('weblog.post', ['post' => $post]);
+            } else {
+                return redirect('user.premium');
+            }
+        } else {
+            return view('weblog.post', ['post' => $post]);
+        }
     }
 
     function addComment(Comment $comment, Post $post){
@@ -52,6 +62,7 @@ class PostController extends Controller
         request()->merge(['user_id' => Auth::user()->id]);
         $this->validateArticle();
         $post = new Post(request(['title', 'excerpt', 'body', 'user_id', 'image-file']));
+        $post->premium = request()->has('premium');
         $this->validateFile();
         $post['image'] = request('image-file')->store('imagefiles');
         $post->save();
@@ -93,6 +104,7 @@ class PostController extends Controller
             'body' => 'required|string|min:2',
             'user_id' => 'required|integer',
             'categories' => 'exists:categories,id',
+            'premium' => '',
         ]);
     }
 

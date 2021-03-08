@@ -50,6 +50,13 @@
         @enderror
     </div>
 
+<!-- Premium -->
+    <div class="form-group">
+        <label for="premium" class="form-check-label">Premium article?</label>
+        <input type="checkbox" class="form-check" id="premium" name="premium"></input>
+    </div>
+    {{$errors}}
+
 <!-- Upload image -->
     <div class="form-group custom-file @error('image-file') has-error @enderror">
         <input type="file" class="custom-file-input form-control" id="image-file" name="image-file">

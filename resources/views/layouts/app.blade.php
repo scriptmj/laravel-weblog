@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="jumbotron">
-        <h1 class="display-4 m-5">Laravel Weblog</h1>
+        <h1 class="display-4 m-5"><a href="{{route('weblog.index')}}" style="color:inherit;text-decoration:inherit;">Laravel Weblog</a></h1>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,6 +32,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{Request::path() === 'premium' ? 'active' : ''}}" href="{{route('user.premium')}}">Premium account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{Request::path() === 'digest' ? 'active' : ''}}" href="{{route('user.digest')}}">Weekly newsletter</a>
             </li>
             @endif
             </ul>

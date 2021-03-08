@@ -28,5 +28,7 @@
         @empty
     <p>No posts found in this category</p>
     @endforelse
-
+@if($posts->links())
+{{$posts->links()}}
+@endif
 @endsection

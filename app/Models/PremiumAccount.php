@@ -9,6 +9,9 @@ class PremiumAccount extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id'];
+    public $timestamps = false;
+
     public function user(){
         return $this->belongsTo('App\Models\User');
     }

@@ -26,6 +26,7 @@
 <div class="container">
     <h3>Comments</h3>
 
+@if(Auth::check())
     <h4>Add a comment</h4>
     <form class="form-horizontal" action="{{route('post.addcomment', [$post])}}" method="post">
     @csrf
@@ -41,8 +42,8 @@
     </form>
     <br />
     <br />
-
-    @foreach($post->comments as $comment)
+@endif
+    @foreach($post->comments->sortByDesc('posted_at') as $comment)
     <div class="card">
         <p><strong>{{$comment->user->username}}</strong> said:</p>
         <p>{{$comment->body}}</p>
