@@ -7,20 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Digest extends Mailable
+class PremiumDigest extends Mailable
 {
     use Queueable, SerializesModels;
-    public $posts;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($posts, $user, $premiumposts){
+    public function __construct($posts, $user)
+    {
         $this->posts = $posts;
         $this->user = $user;
-        $this->premiumposts = $premiumposts;
     }
 
     /**
@@ -30,6 +29,6 @@ class Digest extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.digestmail')->with(['posts' => $this->posts, 'user' => $this->user, 'premiumposts' => $this->premiumposts]);
+        return $this->view('emails.digestpremiummail')->with(['posts' => $this->posts, 'user' => $this->user]);
     }
 }

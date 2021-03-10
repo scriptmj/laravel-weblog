@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     function index(){
-        if(Auth::user()->premium()){
+        if(Auth::user() && Auth::user()->premium){
             $posts = Post::orderBy('created_at', 'DESC')->paginate(5);
         } else {
             $posts = Post::where('premium', false)->orderBy('created_at', 'DESC')->paginate(5);
@@ -25,7 +25,6 @@ class PostController extends Controller
             'categories' => $categories, 
             'posts' => $posts, 
             ]);
-
         if(request()->ajax()){
             $sections = $view->renderSections();
             return $sections['content'];

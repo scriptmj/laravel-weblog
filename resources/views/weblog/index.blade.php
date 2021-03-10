@@ -15,8 +15,10 @@
 @forelse($posts as $post)
 
     <div class="card w-50">
-        <span></span>
-        <h2 class="card-title"><a href="{{route('post.get', $post)}}">{{$post->title}}</a></h2>
+        @if($post->premium)
+        <span class="card-header"><strong>Premium</strong></span>
+        @endif
+        <h2 class="card-title m-2"><a href="{{route('post.get', $post)}}">{{$post->title}}</a></h2>
         <a href="{{route('post.get', $post)}}"><img class="card-img-top" width="50%" src="{{$post->image}}"></img></a>
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">By: {{$post->user->username}}. Published: {{$post->created_at}}</h6>
@@ -35,6 +37,7 @@
             <h6 class="card-subtitle mb-2 text-muted">Last updated: {{$post->lastUpdatedAt()}}</h6> 
         </div>
     </div>
+    <br />
 @empty
 <p>No posts found</p>
 @endforelse

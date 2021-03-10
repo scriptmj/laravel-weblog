@@ -52,7 +52,8 @@ class User extends Authenticatable
     }
 
     public function premium(){
-        return $this->premium_id;
+        //return $this->premium_id;
+        return $this->hasOne('App\Models\PremiumAccount');
     }
 }
 

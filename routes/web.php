@@ -51,9 +51,7 @@ Route::delete('/category/{category}', 'App\Http\Controllers\CategoryController@d
     ->name('category.destroy');
 Route::get('/category/{category}/posts', 'App\Http\Controllers\CategoryController@getPostsByCategory')->name('category.posts');
 
-Route::get('/premium', 'App\Http\Controllers\UserController@premium')
-    ->middleware('auth')
-    ->name('user.premium');
+
 
 Route::get('/written', 'App\Http\Controllers\PostController@written')
     ->middleware('auth')
@@ -65,6 +63,17 @@ Route::get('/digest', 'App\Http\Controllers\UserController@digest')->name('user.
 Route::get('/unsubscribe', 'App\Http\Controllers\UserController@unsubscribe')->name('user.unsubscribe');
 Route::get('/subscribe', 'App\Http\Controllers\UserController@subscribe')->name('user.subscribe');
 
-Route::get('/premiumsignon', 'App\Http\Controllers\UserController@premiumSignOn')->name('user.premiumsignon');
+Route::get('/premium', 'App\Http\Controllers\UserController@premium')
+    ->middleware('auth')
+    ->name('user.premium');
+Route::post('/premiumsignon', 'App\Http\Controllers\UserController@premiumSignOn')
+    ->middleware('auth')
+    ->name('user.premiumsignon');
+Route::post('/premiumsignoff', 'App\Http\Controllers\UserController@premiumSignOff')
+    ->middleware('auth')
+    ->name('user.premiumsignoff');
+Route::post('/cancelpremiumsignoff', 'App\Http\Controllers\UserController@cancelPremiumSignOff')
+    ->middleware('auth')
+    ->name('user.cancelpremiumsignoff');
 
 require __DIR__.'/auth.php';

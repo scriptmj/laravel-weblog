@@ -54,6 +54,7 @@ class PostSeeder extends Seeder
             'created_at' => Carbon::create(2020, 5, 23),
             'updated_at' => Carbon::create(2020, 5, 23),
             'image' => 'imagefiles/FdWcb32SHcUL7pm75IKb9BrzSYR6I8etslhV83N8.jpg',
+            'premium' => 1,
         ]);
         
         DB::table('posts')->insert([
@@ -81,6 +82,7 @@ class PostSeeder extends Seeder
             'created_at' => Carbon::create(2020, 9, 11),
             'updated_at' => Carbon::create(2020, 9, 11),
             'image' => 'imagefiles/UIUfglGN39rkTp2f6Ryauooa4UqnwW7OwSuuNzXh.jpg',
+            'premium' => 1,
         ]);
         DB::table('posts')->insert([
             'title' => 'The Snow\'s Rainbow',

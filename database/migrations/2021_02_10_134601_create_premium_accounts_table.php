@@ -19,6 +19,8 @@ class CreatePremiumAccountsTable extends Migration
             $table->timestamp('subscribed_at');
             $table->timestamp('last_payment')->nullable();
             $table->timestamp('next_payment')->nullable();
+            $table->boolean('active');
+            $table->unsignedBigInteger('deactivation_job')->nullable();
         });
     }
 
