@@ -62,8 +62,8 @@ class UserController extends Controller
             $premium = $user->premium;
             //dd($premium);
             // $premium->deactivation_job = $job->id;
-            dd($premium->deactivation());
-            $premium->deactivation()->save($job);
+            $user->premium->deactivation_job = $job->id;
+            $user->premium->update();
         }
         return redirect(route('user.premium'));
     }
@@ -72,12 +72,13 @@ class UserController extends Controller
         $user = Auth::user();
         if($user->premium_id != null){
             if($user->premium->deactivation_job != null){
-                $user->premium->deactivation()->delete();
+                $job = $user->premium->currentDeactivationJob()->first();
+                $job->delete();
+                $user->premium->deactivation_job = null;
+                $user->premium->update();
                 // $premiumAcc = $user->premium;
                 // $deactivationJob = $user->premium->deactivation;
                 // $deactivationJob->delete();
-                // $premiumAcc->deactivation_job = null;
-                // $premiumAcc->update();
             }
         }
         return redirect(route('user.premium'));
@@ -94,5 +95,4 @@ class UserController extends Controller
         $premiumAcc->save();
         return $premiumAcc->id;
     }
-
 }

@@ -32,7 +32,7 @@
 @endif
 
 @if($user->premium && $user->premium->deactivation_job != null)
-<p>Your subscription will end on {{$user->premium->deactivation->deactivation_date}}</p>
+<p>Your subscription will end on {{$user->premium->currentDeactivationJob()->first()->deactivation_date}}</p>
 
 <form action="{{route('user.cancelpremiumsignoff')}}" method="post">
 @csrf

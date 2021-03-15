@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PremiumDeactivationJob;
 
 class PremiumAccount extends Model
 {
@@ -18,5 +19,9 @@ class PremiumAccount extends Model
 
     public function deactivation(){
         return $this->hasOne('App\Models\PremiumDeactivationJob', 'premium_id', 'deactivation_job');
+    }
+
+    public function currentDeactivationJob(){
+        return $deactivationJob = PremiumDeactivationJob::where('premium_id', $this->id)->get();
     }
 }
