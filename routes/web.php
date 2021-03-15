@@ -63,16 +63,16 @@ Route::get('/digest', 'App\Http\Controllers\UserController@digest')->name('user.
 Route::get('/unsubscribe', 'App\Http\Controllers\UserController@unsubscribe')->name('user.unsubscribe');
 Route::get('/subscribe', 'App\Http\Controllers\UserController@subscribe')->name('user.subscribe');
 
-Route::get('/premium', 'App\Http\Controllers\UserController@premium')
+Route::get('/premium', 'App\Http\Controllers\PremiumController@premium')
     ->middleware('auth')
     ->name('user.premium');
-Route::post('/premiumsignon', 'App\Http\Controllers\UserController@premiumSignOn')
+Route::post('/premiumsignon', 'App\Http\Controllers\PremiumController@premiumSignOn')
     ->middleware('auth')
     ->name('user.premiumsignon');
-Route::post('/premiumsignoff', 'App\Http\Controllers\UserController@premiumSignOff')
+Route::post('/premiumsignoff', 'App\Http\Controllers\PremiumController@premiumSignOff')
     ->middleware('auth')
     ->name('user.premiumsignoff');
-Route::post('/cancelpremiumsignoff', 'App\Http\Controllers\UserController@cancelPremiumSignOff')
+Route::post('/cancelpremiumsignoff', 'App\Http\Controllers\PremiumController@cancelPremiumSignOff')
     ->middleware('auth')
     ->name('user.cancelpremiumsignoff');
 

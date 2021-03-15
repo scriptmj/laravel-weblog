@@ -10,7 +10,7 @@ class PremiumAccount extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'deactivation_job'];
+    protected $fillable = ['user_id', 'deactivation_job', 'active',];
     public $timestamps = false;
 
     public function user(){
@@ -23,5 +23,9 @@ class PremiumAccount extends Model
 
     public function currentDeactivationJob(){
         return $deactivationJob = PremiumDeactivationJob::where('premium_id', $this->id)->get();
+    }
+
+    public function getMaskedCCNumber(){
+        return substr($this->ccnumber, 13);
     }
 }

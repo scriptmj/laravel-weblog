@@ -21,6 +21,11 @@ class CreatePremiumAccountsTable extends Migration
             $table->timestamp('next_payment')->nullable();
             $table->boolean('active');
             $table->unsignedBigInteger('deactivation_job')->nullable();
+            $table->string('ccname');
+            $table->string('ccnumber');
+            $table->integer('ccexpdatemm');
+            $table->integer('ccexpdateyy');
+            $table->integer('cccvv');
         });
     }
 
